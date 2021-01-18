@@ -1,6 +1,4 @@
-# LinkedList
-
-Linked List Data structure in JavaScript
+/*
 
 LinkedList, a JavaScript Linked List Data Structure.
 
@@ -15,14 +13,41 @@ the Free Software Foundation, either version 3 of the License, or
 
 LinkedList is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with LinkedList. If not, see <https://www.gnu.org/licenses/>.
+along with LinkedList.  If not, see <https://www.gnu.org/licenses/>.
 
 Written by Subendra Kumar Sharma.
 
-### This is free software (Free as in freedom not the price). If you like to use this library on a non free software, you can get a proprietary license. To get a proprietary license contact _reach.subendra.kr@gmx.com_.
+*/
 
-## The is a beta release. This version is unstable.
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
+
+module.exports = merge(common, {
+	mode: "production",
+	devtool: "none",
+	output: {
+		path: __dirname + "/dist/umd/",
+		filename:
+			process.env.MINIMIZE === "true"
+				? "interval.tree.js.production.min.js"
+				: "interval.tree.js.development.js",
+	},
+	externals: {
+		Queue: {
+			commonjs: "Queue",
+			commonjs2: "Queue",
+			amd: "Queue",
+			root: "Queue",
+		},
+		Stack: {
+			commonjs: "Stack",
+			commonjs2: "Stack",
+			amd: "Stack",
+			root: "Stack",
+		},
+	},
+});
